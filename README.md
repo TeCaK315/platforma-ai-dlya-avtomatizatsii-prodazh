@@ -1,2 +1,3 @@
-# platforma-ai-dlya-avtomatizatsii-prodazh
-Платформа, которая помогает измерить рентабельность инвестиций в автоматизацию продаж с использованием AI.
+# Project
+
+Generated with TrendHunter AI

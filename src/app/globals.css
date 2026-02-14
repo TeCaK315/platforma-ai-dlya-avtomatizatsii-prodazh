@@ -2,84 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
-
-:root {
-  --primary: #4A90E2;
-  --secondary: #50E3C2;
-  --accent: #F5A623;
-  --background: #1F1F1F;
-  --text: #EAEAEA;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
-  background-color: var(--background);
-  color: var(--text);
+  background-color: #1F1F1F;
+  color: #EAEAEA;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-gradient-to-r from-primary to-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95;
+  .gradient-button {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent;
+    @apply text-white font-semibold py-3 px-6 rounded-lg;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:scale-105;
+    @apply active:scale-95;
   }
 
-  .btn-secondary {
-    @apply bg-gradient-to-r from-secondary to-green-500 text-gray-900 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95;
+  .gradient-button-secondary {
+    @apply bg-gradient-to-r from-secondary to-primary;
+    @apply text-white font-semibold py-2 px-5 rounded-lg;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-md hover:scale-105;
   }
 
-  .btn-accent {
-    @apply bg-gradient-to-r from-accent to-orange-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95;
+  .card-shadow {
+    @apply shadow-lg shadow-black/20;
+    @apply hover:shadow-xl hover:shadow-black/30;
+    @apply transition-shadow duration-300;
   }
 
-  .card {
-    @apply bg-gray-800 rounded-xl shadow-2xl p-6 transition-all duration-300 hover:shadow-3xl border border-gray-700;
+  .card-shadow-accent {
+    @apply shadow-lg shadow-accent/10;
+    @apply hover:shadow-xl hover:shadow-accent/20;
+    @apply transition-shadow duration-300;
   }
 
-  .card-hover {
-    @apply card hover:transform hover:-translate-y-1 hover:border-primary;
+  .gradient-border {
+    position: relative;
+    background: #2A2A2A;
+    border-radius: 0.75rem;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    padding: 2px;
+    background: linear-gradient(135deg, #4A90E2, #50E3C2, #F5A623);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 
   .input-field {
-    @apply w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-text placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-3 bg-gray-800 border border-gray-700;
+    @apply rounded-lg text-text placeholder-gray-500;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-200;
   }
 
-  .label-text {
-    @apply block text-sm font-medium text-gray-300 mb-2;
+  .input-field:hover {
+    @apply border-gray-600;
+  }
+
+  .metric-card {
+    @apply bg-gradient-to-br from-gray-800 to-gray-900;
+    @apply rounded-xl p-6 card-shadow;
+    @apply border border-gray-700/50;
+  }
+
+  .chart-container {
+    @apply bg-gray-800/50 rounded-xl p-6;
+    @apply border border-gray-700/30;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .shadow-3xl {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent;
+    @apply bg-clip-text text-transparent;
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn 0.5s ease-in-out;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+    animation: slideUp 0.4s ease-out;
   }
 
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #4A90E2 #2A2A2A;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #2A2A2A;
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #4A90E2;
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #5BA3F5;
   }
 }
 
@@ -101,50 +151,4 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(0);
     opacity: 1;
   }
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.metric-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.metric-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-.metric-card:hover::before {
-  left: 100%;
-}
-
-.progress-bar {
-  height: 8px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  border-radius: 4px;
-  transition: width 1s ease-out;
-}
-
-.priority-high {
-  @apply bg-red-500/20 text-red-400 border border-red-500/50;
-}
-
-.priority-medium {
-  @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/50;
-}
-
-.priority-low {
-  @apply bg-green-500/20 text-green-400 border border-green-500/50;
 }

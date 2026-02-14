@@ -3,14 +3,17 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
   reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
+  images: {
+    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'recharts'],
   },
 };
 

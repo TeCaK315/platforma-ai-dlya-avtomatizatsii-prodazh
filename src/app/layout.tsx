@@ -2,9 +2,12 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI Sales Automation Platform - ROI Analytics',
-  description: 'Optimize your sales process with AI-powered ROI analytics and automation recommendations',
-  keywords: 'AI, sales automation, ROI, analytics, optimization',
+  title: 'AI Sales Automation Platform - ROI Analytics & Optimization',
+  description: 'Analyze and optimize your sales automation investments with AI-powered insights and recommendations',
+  keywords: 'sales automation, ROI calculator, AI analytics, sales optimization, business intelligence',
+  authors: [{ name: 'AI Sales Platform' }],
+  viewport: 'width=device-width, initial-scale=1',
+  themeColor: '#1F1F1F',
 };
 
 export default function RootLayout({
@@ -20,7 +23,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-text antialiased">
         <div className="relative min-h-screen">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-background to-gray-900 opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
           <div className="relative z-10">
             {children}
           </div>

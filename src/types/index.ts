@@ -1,32 +1,41 @@
+export interface Investment {
+  id: string;
+  toolName: string;
+  cost: number;
+  implementationDate: string;
+  expectedBenefits: string;
+  category: 'crm' | 'email' | 'analytics' | 'chatbot' | 'other';
+  status: 'active' | 'inactive' | 'pending';
+  createdAt: string;
+}
+
 export interface SalesData {
   id: string;
-  period: string;
+  investmentId: string;
+  date: string;
   revenue: number;
-  units_sold: number;
-  average_deal_size: number;
-  conversion_rate: number;
-  sales_cycle_days: number;
-  timestamp: string;
+  dealsClosed: number;
+  timeSaved: number;
+  conversionRate: number;
+  createdAt: string;
 }
 
-export interface InvestmentData {
-  id: string;
-  ai_tools_cost: number;
-  implementation_cost: number;
-  training_cost: number;
-  maintenance_cost: number;
-  period: string;
-  timestamp: string;
+export interface ROIReport {
+  investmentId: string;
+  totalInvestment: number;
+  totalRevenue: number;
+  netProfit: number;
+  roiPercentage: number;
+  paybackPeriod: number;
+  monthlyROI: ChartDataPoint[];
+  generatedAt: string;
 }
 
-export interface ROIMetrics {
-  total_roi: number;
-  roi_percentage: number;
-  payback_period_months: number;
-  cost_savings: number;
-  revenue_increase: number;
-  efficiency_gain_percentage: number;
-  time_saved_hours: number;
+export interface ChartDataPoint {
+  month: string;
+  roi: number;
+  revenue: number;
+  cost: number;
 }
 
 export interface OptimizationRecommendation {
@@ -34,32 +43,40 @@ export interface OptimizationRecommendation {
   title: string;
   description: string;
   priority: 'high' | 'medium' | 'low';
-  impact_category: 'cost_reduction' | 'revenue_increase' | 'efficiency';
-  estimated_impact: number;
-  implementation_difficulty: 'easy' | 'medium' | 'hard';
+  category: 'cost_reduction' | 'revenue_increase' | 'efficiency' | 'automation';
+  potentialImpact: string;
+  actionItems: string[];
+  estimatedROIIncrease: number;
+  implementationEffort: 'low' | 'medium' | 'high';
+  createdAt: string;
 }
 
-export interface AnalysisResult {
-  id: string;
-  sales_data: SalesData;
-  investment_data: InvestmentData;
-  metrics: ROIMetrics;
-  recommendations: OptimizationRecommendation[];
-  created_at: string;
+export interface MetricCard {
+  title: string;
+  value: string | number;
+  change: number;
+  trend: 'up' | 'down' | 'neutral';
+  icon: string;
 }
 
-export interface DashboardData {
-  current_metrics: ROIMetrics | null;
-  recent_analyses: AnalysisResult[];
-  recommendations: OptimizationRecommendation[];
+export interface APIResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
 }
 
-export interface DataInputForm {
-  sales: Omit<SalesData, 'id' | 'timestamp'>;
-  investment: Omit<InvestmentData, 'id' | 'timestamp'>;
+export interface AnalyzeROIRequest {
+  investments: Investment[];
+  salesData: SalesData[];
+  dateRange?: {
+    start: string;
+    end: string;
+  };
 }
 
-export interface ValidationError {
-  field: string;
-  message: string;
+export interface GenerateRecommendationsRequest {
+  roiReport: ROIReport;
+  investments: Investment[];
+  salesData: SalesData[];
 }
